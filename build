@@ -1,6 +1,4 @@
 #!/bin/bash
 
-sudo apt-get install byacc flex
 sudo apt-get install gcc
-lex main.l
-gcc lex.yy.c -lfl -o lexer
+gcc main.cpp -o normalization
