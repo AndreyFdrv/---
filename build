@@ -1,4 +1,6 @@
 #!/bin/bash
 
 sudo apt-get install gcc
-gcc main.cpp -o normalization
+gcc -c main.cpp
+gcc -c normalization.cpp
+gcc main.o normalization.o -o normalization
