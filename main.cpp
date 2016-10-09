@@ -34,8 +34,6 @@ bool isTerminal(char t)
 		return true;
 	if ((t == '+') || (t == '*'))
 		return true;
-	if ((t >= '0') && (t <= '9'))
-		return true;
 	return false;
 }
 void Step2(char *text)
@@ -145,7 +143,7 @@ void Step3(char *text)
 	}
 	next_letter++;//íàøëè next_letter
 	int nonterminal_count = 0;
-	for (int i = 3; text[i] != '\0'; i++)
+	for (int i = 3; text[i] != '\0'; )
 	{
 		int left_border, right_border;
 		if (isLeftBorder(text[i]))
@@ -160,6 +158,8 @@ void Step3(char *text)
 				i++;
 			}
 		}
+		else
+			i++;
 		if (nonterminal_count > 2)
 		{
 			char begin_str[100];
@@ -418,8 +418,15 @@ main(int argc,char *argv[])
 		printf("File does not exist\n");	
 	else
 	{
-		char text[200];
-		fread(text, 200, 1, in);
+		char text[100]="\0";
+		char* str_err;
+		char str[50];
+		str_err=fgets(str, 50, in);
+		while(str_err!=NULL)
+		{
+			strcat(text, str);
+			str_err=fgets(str, 50, in);
+		}
 		Step1(text);
 		Step2(text);
 		Step3(text);
